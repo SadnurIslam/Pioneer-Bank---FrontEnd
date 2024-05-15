@@ -1,0 +1,49 @@
+body{
+    padding: 120px;
+}
+
+#login-area{
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px gray;
+    margin-top: 40px;
+}
+
+#txn-area{
+    display: none;
+}
+
+.deposit{
+    background-color: blue;
+    padding: 20px;
+    border-radius: 5px;
+}
+.bal-box p{
+    font-size: 40px;
+    font-weight: 600;
+}
+.withdraw{
+    background-color: lightsalmon;
+    padding: 20px;
+    border-radius: 5px;
+}
+.balance{
+    background-color: orange;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.bal-box{
+    padding: 20px;
+    color: #fff;
+}
+
+.dw-box{
+    padding: 10px;
+}
+
+.deposit-box,.withdraw-box{
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px gray;
+}
