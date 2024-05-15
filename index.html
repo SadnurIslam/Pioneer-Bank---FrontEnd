@@ -26,19 +26,19 @@
             <div class="col-md-4 col-12 bal-box ">
                 <div class="deposit">
                     <h4>Deposit</h4>
-                    <p>$ 00</p>
+                    <p>$ <span id="currentDeposit">00</span></p>
                 </div>
             </div>
             <div class="col-md-4 col-12 bal-box">
                 <div class=" withdraw">
                     <h4>Withdraw</h4>
-                    <p>$ 00</p>
+                    <p>$ <span id="currentWithdraw">00</span></p>
                 </div>
             </div>
             <div class="col-md-4 col-12 bal-box">
                 <div class=" balance">
                     <h4>Balance</h4>
-                    <p>$ 00</p>
+                    <p>$ <span id="addBalance">1240</span></p>
                 </div>
             </div>
         </div>
@@ -46,15 +46,15 @@
             <div class="col-md-6 col-12 dw-box">
                 <div class="deposit-box">
                     <h4>Deposit</h4>
-                    <input type="text" class="form-control" name="" id="" placeholder="$ amount you want to deposit"><br>
-                    <button class="btn btn-success">Deposit</button>
+                    <input type="text" class="form-control" name="" id="depositAmount" placeholder="$ amount you want to deposit"><br>
+                    <button id="addDeposit" class="btn btn-success">Deposit</button>
                 </div>
             </div>
             <div class="col-md-6 col-12 dw-box">
                 <div class="withdraw-box">
                     <h4>Withdraw</h4>
-                    <input type="text" class="form-control" name="" id="" placeholder="$ amount you want to withdraw"><br>
-                    <button class="btn btn-success">Withdraw</button>
+                    <input type="text" class="form-control" name="" id="withdrawAmount" placeholder="$ amount you want to withdraw"><br>
+                    <button id="addWithdraw" class="btn btn-success">Withdraw</button>
                 </div>
             </div>
         </div>
@@ -65,6 +65,41 @@
             document.getElementById('login-front').style.display='none';
             document.getElementById('txn-area').style.display='block';
         })
+        const addDeposit =  document.getElementById('addDeposit');
+        addDeposit.addEventListener('click',function(){
+            const addAmount = document.getElementById('depositAmount').value;
+            if(isNaN(addAmount) || addAmount==""){
+                document.getElementById('depositAmount').value = "";
+                alert('Enter a valid deposit amount!');
+                return;
+            }
+            const depositAmount = parseFloat(addAmount);
+            const currentDeposit = document.getElementById('currentDeposit').innerText;
+            const currentAmount = parseFloat(currentDeposit);
+            document.getElementById('currentDeposit').innerText = depositAmount+currentAmount;
+            updateBalance(depositAmount);
+            document.getElementById('depositAmount').value = "";
+            
+        })
+        const addWithdraw =  document.getElementById('addWithdraw');
+        addWithdraw.addEventListener('click',function(){
+            const addAmount = document.getElementById('withdrawAmount').value;
+            if(isNaN(addAmount) || addAmount==""){
+                alert('Enter a valid deposit amount!');
+                document.getElementById('withdrawAmount').value = "";
+                return;
+            }
+            const withdrawAmount = parseFloat(addAmount);
+            const currentWithdraw = document.getElementById('currentWithdraw').innerText;
+            const currentAmount = parseFloat(currentWithdraw);
+            document.getElementById('currentWithdraw').innerText = currentAmount+withdrawAmount;
+            updateBalance(withdrawAmount*-1);
+            document.getElementById('withdrawAmount').value = "";
+        })
+        function updateBalance(amount){
+            const currentBalance = parseFloat(document.getElementById('addBalance').innerText);
+            document.getElementById('addBalance').innerText = currentBalance+amount;
+        }
     </script>
 </body>
 </html>
