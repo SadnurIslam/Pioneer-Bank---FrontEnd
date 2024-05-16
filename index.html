@@ -68,37 +68,36 @@
         const addDeposit =  document.getElementById('addDeposit');
         addDeposit.addEventListener('click',function(){
             const addAmount = document.getElementById('depositAmount').value;
-            if(isNaN(addAmount) || addAmount==""){
-                document.getElementById('depositAmount').value = "";
-                alert('Enter a valid deposit amount!');
+            if(!isValidAmount(addAmount)){
                 return;
             }
             const depositAmount = parseFloat(addAmount);
-            const currentDeposit = document.getElementById('currentDeposit').innerText;
-            const currentAmount = parseFloat(currentDeposit);
-            document.getElementById('currentDeposit').innerText = depositAmount+currentAmount;
-            updateBalance(depositAmount);
+            updateBalance('currentDeposit',depositAmount);
             document.getElementById('depositAmount').value = "";
             
         })
         const addWithdraw =  document.getElementById('addWithdraw');
         addWithdraw.addEventListener('click',function(){
             const addAmount = document.getElementById('withdrawAmount').value;
-            if(isNaN(addAmount) || addAmount==""){
-                alert('Enter a valid deposit amount!');
-                document.getElementById('withdrawAmount').value = "";
+            if(!isValidAmount(addAmount)){
                 return;
             }
             const withdrawAmount = parseFloat(addAmount);
-            const currentWithdraw = document.getElementById('currentWithdraw').innerText;
-            const currentAmount = parseFloat(currentWithdraw);
-            document.getElementById('currentWithdraw').innerText = currentAmount+withdrawAmount;
-            updateBalance(withdrawAmount*-1);
+            updateBalance('currentWithdraw',withdrawAmount*-1);
             document.getElementById('withdrawAmount').value = "";
         })
-        function updateBalance(amount){
-            const currentBalance = parseFloat(document.getElementById('addBalance').innerText);
-            document.getElementById('addBalance').innerText = currentBalance+amount;
+        function updateBalance(id,amount){
+            const currentBalance = parseFloat(document.getElementById(id).innerText);
+            document.getElementById(id).innerText = currentBalance+Math.abs(amount);
+            const balance = parseFloat(document.getElementById('addBalance').innerText);
+            document.getElementById('addBalance').innerText = balance+amount;
+        }
+        function isValidAmount(addAmount){
+            if(isNaN(addAmount) || addAmount=="" || addAmount[0]=='-'){
+                alert('Enter a valid deposit amount!');
+                return false;
+            }
+            return true;
         }
     </script>
 </body>
